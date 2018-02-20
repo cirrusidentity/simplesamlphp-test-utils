@@ -19,12 +19,9 @@ class AspectMockConfigured extends \PHPUnit_Framework_TestCase
     public function testAspectMockConfigured()
     {
         // Ensure mocks are configured for SSP classes
-        $httpDouble = test::double('SimpleSAML\Utils\HTTP', [
-            'getAcceptLanguage' => ['some-lang']
-        ]);
+        $httpDouble = SanityChecker::confirmAspectMockConfigured();
 
-        $this->assertEquals(['some-lang'], \SimpleSAML\Utils\HTTP::getAcceptLanguage());
-        // You can also validate the that a method was called.
+        // We can also validate the that a method was called.
         $httpDouble->verifyInvokedOnce('getAcceptLanguage');
     }
 }
