@@ -4,7 +4,7 @@ namespace CirrusIdentity\SSP\Test;
 
 use AspectMock\Test as test;
 
-class AspectMockConfigured extends \PHPUnit_Framework_TestCase
+class AspectMockConfiguredTest extends \PHPUnit_Framework_TestCase
 {
 
     protected function tearDown()
