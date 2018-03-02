@@ -8,10 +8,12 @@
 
 namespace CirrusIdentity\SSP\Test\Auth;
 
+use SimpleSAML\Utils\ClearableState;
+
 /**
  * Records the state passed into the authentication call.
  */
-class AuthSourceRecorder extends \SimpleSAML_Auth_Source
+class AuthSourceRecorder extends \SimpleSAML_Auth_Source implements ClearableState
 {
 
     static $authenticateInvocations = [];
@@ -31,5 +33,13 @@ class AuthSourceRecorder extends \SimpleSAML_Auth_Source
      */
     public static function getAuthentications() {
         return self::$authenticateInvocations;
+    }
+
+    /**
+     * Clear any cached internal state.
+     */
+    public static function clearInternalState()
+    {
+        self::$authenticateInvocations = [];
     }
 }

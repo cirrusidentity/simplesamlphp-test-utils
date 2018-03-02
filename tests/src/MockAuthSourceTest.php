@@ -13,7 +13,8 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        test::clean(); // remove all registered test doubles
+        MockAuthSource::clearInternalState();
+        AuthSourceRecorder::clearInternalState();
     }
 
     public function testMockAuthSource() {
@@ -28,6 +29,23 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         MockAuthSource::getById($source1, 'otherName');
         $this->assertEquals($source, SimpleSAML_Auth_Source::getById('authName'));
         $this->assertEquals($source1, SimpleSAML_Auth_Source::getById('otherName'));
+
+    }
+
+    /**
+     * Confirm the mock auth source is storing by reference. This allows access to any source
+     * that gets called.
+     */
+    public function testAuthSourceStoreByReference() {
+        $source = [ 'key' => 'val'];
+        MockAuthSource::getById($source, 'add');
+        $source['key'] = 'val1';
+
+        $loadedSource = SimpleSAML_Auth_Source::getById('add');
+        $this->assertEquals('val1', $loadedSource['key']);
+
+        $loadedSource['key'] = 'val2';
+        $this->assertEquals('val1', $source['key']);
 
     }
 
