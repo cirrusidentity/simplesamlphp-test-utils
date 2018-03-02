@@ -24,11 +24,29 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         $this->assertNull(SimpleSAML_Auth_Source::getById('abc'));
         $this->assertEquals($source, SimpleSAML_Auth_Source::getById('authName'));
 
-        // Adding additonal auth sources preservers the previous ones
+        // Adding additional auth sources preservers the previous ones
         MockAuthSource::getById($source1, 'otherName');
         $this->assertEquals($source, SimpleSAML_Auth_Source::getById('authName'));
         $this->assertEquals($source1, SimpleSAML_Auth_Source::getById('otherName'));
 
+    }
+
+    public function testMockCompleteAuth() {
+        $double = MockAuthSource::completeAuth();
+        $double->verifyNeverInvoked('completeAuth');
+        $state = ['myKey' => 'myValue'];
+        SimpleSAML_Auth_Source::completeAuth($state);
+
+        // Confirm method called
+        $double->verifyInvokedOnce('completeAuth');
+        // Confirm method called with specific args
+        $double->verifyInvokedOnce('completeAuth', [$state]);
+
+        // Inspect arguments
+        $invocations = $double->getCallsForMethod('completeAuth');
+        $firstInvocation = $invocations[0];
+        $firstArg = $firstInvocation[0];
+        $this->assertEquals('myValue', $firstArg['myKey']);
     }
 
 }

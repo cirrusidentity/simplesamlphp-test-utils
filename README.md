@@ -11,13 +11,14 @@ Install as a dev dependency using composer
     
 Update the dependency
 
-    composer update -dev  cirrusidentity/simplesamlphp-test-utils:dev-master
+    composer update -dev  cirrusidentity/simplesamlphp-test-utils
     
 # Usage
 
 This project makes heavy use of `AspectMock` to make SSP's internal easier to test.
 Adjust your phpunit bootstrap.php per https://github.com/Codeception/AspectMock to setup AspectMock
-and also ensure you set `backupGlobals="false"` in phpunit.xml
+and also ensure you set `backupGlobals="false"` in phpunit.xml. See this projects `boostrap.php` on
+some workarounds for getting AspectMock to play nicely with SSP's custom class loader
 
 You can sanity check your project by calling `SanityChecker::confirmAspectMockConfigured()`
 in a test. See `AspectMockConfiguredTest` for an example.

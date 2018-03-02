@@ -18,6 +18,9 @@ class MockAuthSource
      */
     static $authSourceMap = [];
 
+
+
+
     /**
      * Return $authSource when SSP tries to load $authSourceId
      * @param \SimpleSAML_Auth_Source $authSource the auth source to return
@@ -33,4 +36,15 @@ class MockAuthSource
             }
         ]);
     }
+
+    /**
+     * @return \AspectMock\Proxy\ClassProxy
+     */
+    static public function completeAuth() {
+        return test::double('\SimpleSAML_Auth_Source', [
+            'completeAuth' => null,
+        ]);
+    }
+
+
 }
