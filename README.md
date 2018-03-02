@@ -64,3 +64,9 @@ was being redirect to
         }
 ```
 
+## Mock Auth Sources
+
+See MockAuthSourceTest.
+`bootstrap.php` needs to explicitly load the Source.php file
+
+    $kernel->loadFile($projectRoot . '/vendor/simplesamlphp/simplesamlphp/lib/SimpleSAML/Auth/Source.php');
