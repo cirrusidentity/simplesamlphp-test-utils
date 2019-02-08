@@ -8,10 +8,14 @@ use SimpleSAML\Utils\ClearableState;
 class MockHttp implements ClearableState
 {
 
-    static public function throwOnRedirectTrustedURL() {
+    static public function throwOnRedirectTrustedURL($includeArgsInMessage = false) {
         test::double('SimpleSAML\Utils\HTTP', [
-            'redirectTrustedURL' => function () {
-                throw new RedirectException('redirectTrustedURL', func_get_args());
+            'redirectTrustedURL' => function () use ($includeArgsInMessage) {
+                $msg = 'redirectTrustedURL';
+                if ($includeArgsInMessage) {
+                    $msg .= ': ' .  var_export(func_get_args(), true);
+                }
+                throw new RedirectException($msg, func_get_args());
             }
         ]);
     }
