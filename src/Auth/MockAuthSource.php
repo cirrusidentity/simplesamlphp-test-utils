@@ -28,7 +28,7 @@ class MockAuthSource implements ClearableState
         self::$authSourceMap[$authSourceId] = &$authSource;
         // php 5.6 can't seem to use the static map in the closure
         $map = &self::$authSourceMap;
-        test::double('\SimpleSAML_Auth_Source', [
+        test::double('\SimpleSAML\Auth\Source', [
             'getById' => function & ($authSourceId, $class) use ($map) {
                 $toRet = null;
                 if (array_key_exists($authSourceId, $map)) {
@@ -44,7 +44,7 @@ class MockAuthSource implements ClearableState
      * @return \AspectMock\Proxy\ClassProxy
      */
     static public function completeAuth() {
-        return test::double('\SimpleSAML_Auth_Source', [
+        return test::double('\SimpleSAML\Auth\Source', [
             'completeAuth' => null,
         ]);
     }
@@ -56,6 +56,6 @@ class MockAuthSource implements ClearableState
     public static function clearInternalState()
     {
         $authSourceMap = [];
-        test::clean('\SimpleSAML_Auth_Source');
+        test::clean('\SimpleSAML\Auth\Source');
     }
 }
