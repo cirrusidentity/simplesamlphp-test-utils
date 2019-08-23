@@ -21,7 +21,7 @@ class MockAuthSource implements ClearableState
 
     /**
      * Return $authSource when SSP tries to load $authSourceId
-     * @param \SimpleSAML_Auth_Source $authSource the auth source to return
+     * @param \SimpleSAML\Auth\Source $authSource the auth source to return
      * @param string $authSourceId The auth source ID for this $authSource
      */
     static public function getById(&$authSource, $authSourceId) {

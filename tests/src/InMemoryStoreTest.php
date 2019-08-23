@@ -15,7 +15,7 @@ class InMemoryStoreTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         InMemoryStore::clearInternalState();
-        \SimpleSAML_Configuration::clearInternalState();
+        \SimpleSAML\Configuration::clearInternalState();
     }
 
     public function testState()
@@ -25,7 +25,7 @@ class InMemoryStoreTest extends \PHPUnit_Framework_TestCase
         $config = [
             'store.type' => 'CirrusIdentity\SSP\Test\InMemoryStore',
         ];
-        \SimpleSAML_Configuration::loadFromArray($config, '[ARRAY]', 'simplesaml');
+        \SimpleSAML\Configuration::loadFromArray($config, '[ARRAY]', 'simplesaml');
 
         // when: getting the store
         $store = \SimpleSAML\Store::getInstance();

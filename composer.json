@@ -6,7 +6,7 @@
     "_notes": ["Aspect mock issue https://github.com/Codeception/AspectMock/issues/146 causes us to downgrade goaop/framework"],
     "require": {
         "php" : ">=5.6",
-        "simplesamlphp/simplesamlphp": ">=1.15",
+        "simplesamlphp/simplesamlphp": ">=1.17",
         "codeception/aspect-mock": "2.1.1",
         "goaop/framework": "~2.1.0"
     },

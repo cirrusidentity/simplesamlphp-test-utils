@@ -22,13 +22,13 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         $source =  new AuthSourceRecorder(['AuthId' => 'authName'], $config);
         $source1 =  new AuthSourceRecorder(['AuthId' => 'otherName'], $config);
         MockAuthSource::getById($source, 'authName');
-        $this->assertNull(SimpleSAML_Auth_Source::getById('abc'));
-        $this->assertEquals($source, SimpleSAML_Auth_Source::getById('authName'));
+        $this->assertNull(SimpleSAML\Auth\Source::getById('abc'));
+        $this->assertEquals($source, SimpleSAML\Auth\Source::getById('authName'));
 
         // Adding additional auth sources preservers the previous ones
         MockAuthSource::getById($source1, 'otherName');
-        $this->assertEquals($source, SimpleSAML_Auth_Source::getById('authName'));
-        $this->assertEquals($source1, SimpleSAML_Auth_Source::getById('otherName'));
+        $this->assertEquals($source, SimpleSAML\Auth\Source::getById('authName'));
+        $this->assertEquals($source1, SimpleSAML\Auth\Source::getById('otherName'));
 
     }
 
@@ -41,7 +41,7 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         MockAuthSource::getById($source, 'add');
         $source['key'] = 'val1';
 
-        $loadedSource = SimpleSAML_Auth_Source::getById('add');
+        $loadedSource = SimpleSAML\Auth\Source::getById('add');
         $this->assertEquals('val1', $loadedSource['key']);
 
         $loadedSource['key'] = 'val2';
@@ -53,7 +53,7 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         $double = MockAuthSource::completeAuth();
         $double->verifyNeverInvoked('completeAuth');
         $state = ['myKey' => 'myValue'];
-        SimpleSAML_Auth_Source::completeAuth($state);
+        SimpleSAML\Auth\Source::completeAuth($state);
 
         // Confirm method called
         $double->verifyInvokedOnce('completeAuth');
