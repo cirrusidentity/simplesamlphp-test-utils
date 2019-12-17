@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: patrick
- * Date: 2/28/18
- * Time: 4:47 PM
- */
 
 namespace CirrusIdentity\SSP\Test;
 
 use SimpleSAML\Utils\ClearableState;
-
 
 /**
  * Class InMemoryStore. Used for testing SSP code.

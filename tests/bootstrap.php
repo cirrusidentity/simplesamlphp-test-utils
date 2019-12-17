@@ -18,4 +18,3 @@ $kernel->init([
 // In addition you need to load a class hiearchy from parent down to child, otherwise it can get confused
 $kernel->loadFile($projectRoot . '/vendor/simplesamlphp/simplesamlphp/lib/SimpleSAML/Auth/Source.php');
 //$kernel->loadFile($projectRoot . '/vendor/simplesamlphp/simplesamlphp/lib/SimpleSAML/Session.php');
-

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: patrick
- * Date: 3/1/18
- * Time: 8:41 PM
- */
 
 namespace CirrusIdentity\SSP\Test\Auth;
 
@@ -32,7 +26,8 @@ class AuthSourceRecorder extends Source implements ClearableState
      * Return any recorded calls to authenicate. Key is the the authId
      * @return array the authentications
      */
-    public static function getAuthentications() {
+    public static function getAuthentications()
+    {
         return self::$authenticateInvocations;
     }
 

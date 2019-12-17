@@ -17,7 +17,8 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         AuthSourceRecorder::clearInternalState();
     }
 
-    public function testMockAuthSource() {
+    public function testMockAuthSource()
+    {
         $config = [];
         $source =  new AuthSourceRecorder(['AuthId' => 'authName'], $config);
         $source1 =  new AuthSourceRecorder(['AuthId' => 'otherName'], $config);
@@ -29,14 +30,14 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         MockAuthSource::getById($source1, 'otherName');
         $this->assertEquals($source, SimpleSAML\Auth\Source::getById('authName'));
         $this->assertEquals($source1, SimpleSAML\Auth\Source::getById('otherName'));
-
     }
 
     /**
      * Confirm the mock auth source is storing by reference. This allows access to any source
      * that gets called.
      */
-    public function testAuthSourceStoreByReference() {
+    public function testAuthSourceStoreByReference()
+    {
         $source = [ 'key' => 'val'];
         MockAuthSource::getById($source, 'add');
         $source['key'] = 'val1';
@@ -46,10 +47,10 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
 
         $loadedSource['key'] = 'val2';
         $this->assertEquals('val1', $source['key']);
-
     }
 
-    public function testMockCompleteAuth() {
+    public function testMockCompleteAuth()
+    {
         $double = MockAuthSource::completeAuth();
         $double->verifyNeverInvoked('completeAuth');
         $state = ['myKey' => 'myValue'];
@@ -66,5 +67,4 @@ class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
         $firstArg = $firstInvocation[0];
         $this->assertEquals('myValue', $firstArg['myKey']);
     }
-
 }

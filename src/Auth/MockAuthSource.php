@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: patrick
- * Date: 3/1/18
- * Time: 5:28 PM
- */
 
 namespace CirrusIdentity\SSP\Test\Auth;
+
 use AspectMock\Test as test;
 use SimpleSAML\Utils\ClearableState;
-
 
 class MockAuthSource implements ClearableState
 {
@@ -24,7 +18,8 @@ class MockAuthSource implements ClearableState
      * @param \SimpleSAML\Auth\Source $authSource the auth source to return
      * @param string $authSourceId The auth source ID for this $authSource
      */
-    static public function getById(&$authSource, $authSourceId) {
+    public static function getById(&$authSource, $authSourceId)
+    {
         self::$authSourceMap[$authSourceId] = &$authSource;
         // php 5.6 can't seem to use the static map in the closure
         $map = &self::$authSourceMap;
@@ -35,7 +30,6 @@ class MockAuthSource implements ClearableState
                     $toRet = &$map[$authSourceId];
                 }
                 return $toRet;
-
             }
         ]);
     }
@@ -43,7 +37,8 @@ class MockAuthSource implements ClearableState
     /**
      * @return \AspectMock\Proxy\ClassProxy
      */
-    static public function completeAuth() {
+    public static function completeAuth()
+    {
         return test::double('\SimpleSAML\Auth\Source', [
             'completeAuth' => null,
         ]);

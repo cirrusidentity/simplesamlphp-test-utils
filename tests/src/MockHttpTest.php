@@ -14,11 +14,13 @@ use AspectMock\Test as test;
 class MockHttpTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected function tearDown() {
+    protected function tearDown()
+    {
         test::clean(); // remove all registered test doubles
     }
 
-    public function testTrustedRedirect() {
+    public function testTrustedRedirect()
+    {
 
         // Enable throwing an exception when redirects would normally be called.
         MockHttp::throwOnRedirectTrustedURL();
@@ -35,7 +37,8 @@ class MockHttpTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testUntrustedRedirect() {
+    public function testUntrustedRedirect()
+    {
 
         // Enable throwing an exception when redirects would normally be called.
         MockHttp::throwOnRedirectUntrustedURL();
@@ -51,6 +54,5 @@ class MockHttpTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals('http://my.url.com', $e->getUrl());
             $this->assertEquals($params, $e->getParams());
         }
-
     }
 }
