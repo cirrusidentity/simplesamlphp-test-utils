@@ -2,6 +2,7 @@
 
 namespace CirrusIdentity\SSP\Test;
 
+use SimpleSAML\Store;
 use SimpleSAML\Utils\ClearableState;
 
 /**
@@ -9,7 +10,7 @@ use SimpleSAML\Utils\ClearableState;
  *
  * Use it by setting `'store.type'` in config.php to this clas
  */
-class InMemoryStore extends \SimpleSAML\Store implements ClearableState
+class InMemoryStore extends Store implements ClearableState
 {
 
     private static $store = [];
@@ -25,9 +26,12 @@ class InMemoryStore extends \SimpleSAML\Store implements ClearableState
     public function get($type, $key)
     {
         if (array_key_exists($key, self::$store)) {
-            //TODO: implement expiration check
-            // implement data type check?
-            return self::$store[$key]['value'];
+            $item = self::$store[$key];
+            if (isset($item['expire']) && $item['expire'] < time()) {
+                $this->delete($type, $key);
+                return null;
+            }
+            return $item['value'];
         }
         return null;
     }
