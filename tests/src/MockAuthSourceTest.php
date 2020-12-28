@@ -3,15 +3,16 @@
 use AspectMock\Test as test;
 use CirrusIdentity\SSP\Test\Auth\AuthSourceRecorder;
 use CirrusIdentity\SSP\Test\Auth\MockAuthSource;
+use PHPUnit\Framework\TestCase;
 
 /**
  *
  * Tests mock of various SSP HTTP util static calls
  */
-class MockAuthSourceTest extends \PHPUnit_Framework_TestCase
+class MockAuthSourceTest extends TestCase
 {
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         MockAuthSource::clearInternalState();
         AuthSourceRecorder::clearInternalState();

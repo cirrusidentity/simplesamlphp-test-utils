@@ -5,10 +5,14 @@ require_once($projectRoot . '/vendor/autoload.php');
 
 new \SimpleSAML\Error\ConfigurationError('Load to prevent class resolution issues with aspectMock');
 
+$aopCacheDir = __DIR__ . '/tmp/aop-cache/';
+if (!file_exists($aopCacheDir)) {
+    mkdir($aopCacheDir, 0777, true);
+}
 // Enable AspectMock. This allows us to stub/double out static methods.
 $kernel = \AspectMock\Kernel::getInstance();
 $kernel->init([
-    'debug' => true,
+    'cacheDir'     => $aopCacheDir, // Cache directory
     // Any class that we want to stub/mock needs to be in included paths
     'includePaths' => [
         $projectRoot . '/vendor/simplesamlphp/simplesamlphp/',

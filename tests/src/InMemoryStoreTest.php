@@ -2,13 +2,14 @@
 
 namespace CirrusIdentity\SSP\Test;
 
+use PHPUnit\Framework\TestCase;
 use SimpleSAML\Configuration;
 use SimpleSAML\Store;
 
-class InMemoryStoreTest extends \PHPUnit_Framework_TestCase
+class InMemoryStoreTest extends TestCase
 {
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         InMemoryStore::clearInternalState();
         Configuration::clearInternalState();

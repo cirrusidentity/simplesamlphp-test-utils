@@ -3,6 +3,7 @@
 namespace CirrusIdentity\SSP\Test;
 
 use CirrusIdentity\SSP\Test\Capture\RedirectException;
+use PHPUnit\Framework\TestCase;
 use SimpleSAML\Utils\HTTP;
 
 use AspectMock\Test as test;
@@ -11,10 +12,10 @@ use AspectMock\Test as test;
  *
  * Tests mock of various SSP HTTP util static calls
  */
-class MockHttpTest extends \PHPUnit_Framework_TestCase
+class MockHttpTest extends TestCase
 {
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         test::clean(); // remove all registered test doubles
     }

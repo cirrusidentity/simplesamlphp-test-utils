@@ -3,11 +3,12 @@
 namespace CirrusIdentity\SSP\Test;
 
 use AspectMock\Test as test;
+use PHPUnit\Framework\TestCase;
 
-class AspectMockConfiguredTest extends \PHPUnit_Framework_TestCase
+class AspectMockConfiguredTest extends TestCase
 {
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         test::clean(); // remove all registered test doubles
     }

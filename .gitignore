@@ -4,3 +4,5 @@
 /build/
 .DS_Store
 /aop-cache/
+/tests/tmp/
+.phpunit.result.cache
