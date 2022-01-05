@@ -11,13 +11,13 @@ use SimpleSAML\Utils\ClearableState;
 class AuthSourceRecorder extends Source implements ClearableState
 {
 
-    static $authenticateInvocations = [];
+    private static $authenticateInvocations = [];
 
     /**
      * Stores the state as part of the most recent invocation
      * @param array $state
      */
-    public function authenticate(&$state)
+    public function authenticate(&$state): void
     {
         self::$authenticateInvocations[$this->getAuthId()] = $state;
     }
@@ -34,7 +34,7 @@ class AuthSourceRecorder extends Source implements ClearableState
     /**
      * Clear any cached internal state.
      */
-    public static function clearInternalState()
+    public static function clearInternalState(): void
     {
         self::$authenticateInvocations = [];
     }

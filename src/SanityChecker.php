@@ -6,6 +6,7 @@
 namespace CirrusIdentity\SSP\Test;
 
 use AspectMock\Test as test;
+use SimpleSAML\Utils\HTTP;
 
 class SanityChecker
 {
@@ -21,7 +22,8 @@ class SanityChecker
             'getAcceptLanguage' => ['some-lang']
         ]);
 
-        if (['some-lang'] !== \SimpleSAML\Utils\HTTP::getAcceptLanguage()) {
+
+        if (['some-lang'] !== (new HTTP())->getAcceptLanguage()) {
             throw new \Exception("Aspect mock does not seem to be configured");
         }
         // You can also validate the that a method was called.

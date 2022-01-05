@@ -25,7 +25,7 @@ class InMemoryStoreTest extends TestCase
         Configuration::loadFromArray($config, '[ARRAY]', 'simplesaml');
 
         // when: getting the store
-        $store = Store::getInstance();
+        $store = Store\StoreFactory::getInstance(InMemoryStore::class);
 
         // then: will give us the right type of store
         $this->assertInstanceOf(InMemoryStore::class, $store);

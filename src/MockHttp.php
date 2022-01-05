@@ -4,6 +4,7 @@ namespace CirrusIdentity\SSP\Test;
 use AspectMock\Test as test;
 use CirrusIdentity\SSP\Test\Capture\RedirectException;
 use SimpleSAML\Utils\ClearableState;
+use SimpleSAML\Utils\HTTP;
 
 class MockHttp implements ClearableState
 {
@@ -33,8 +34,8 @@ class MockHttp implements ClearableState
     /**
      * Clear any cached internal state.
      */
-    public static function clearInternalState()
+    public static function clearInternalState(): void
     {
-        test::clean('SimpleSAML\Utils\HTTP');
+        test::clean(HTTP::class);
     }
 }

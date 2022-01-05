@@ -29,7 +29,7 @@ class MockHttpTest extends TestCase
             'state' => '1234'
         ];
         try {
-            HTTP::redirectTrustedURL('http://my.url.com', $params);
+            (new HTTP())->redirectTrustedURL('http://my.url.com', $params);
             $this->fail('Exception expected');
         } catch (RedirectException $e) {
             $this->assertEquals('redirectTrustedURL', $e->getMessage());
@@ -48,7 +48,7 @@ class MockHttpTest extends TestCase
             'state' => '1234'
         ];
         try {
-            HTTP::redirectUntrustedURL('http://my.url.com', $params);
+            (new HTTP())->redirectUntrustedURL('http://my.url.com', $params);
             $this->fail('Exception expected');
         } catch (RedirectException $e) {
             $this->assertEquals('redirectUntrustedURL', $e->getMessage());

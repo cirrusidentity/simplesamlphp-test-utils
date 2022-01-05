@@ -8,6 +8,8 @@ new \SimpleSAML\Error\ConfigurationError('Load to prevent class resolution issue
 $aopCacheDir = __DIR__ . '/tmp/aop-cache/';
 if (!file_exists($aopCacheDir)) {
     mkdir($aopCacheDir, 0777, true);
+} else {
+    echo $aopCacheDir . ' already exists. If you do any composer updates/changes then remove this directory';
 }
 // Enable AspectMock. This allows us to stub/double out static methods.
 $kernel = \AspectMock\Kernel::getInstance();

@@ -4,6 +4,7 @@ use AspectMock\Test as test;
 use CirrusIdentity\SSP\Test\Auth\AuthSourceRecorder;
 use CirrusIdentity\SSP\Test\Auth\MockAuthSource;
 use PHPUnit\Framework\TestCase;
+use SimpleSAML\Auth\Source;
 
 /**
  *
@@ -39,15 +40,11 @@ class MockAuthSourceTest extends TestCase
      */
     public function testAuthSourceStoreByReference()
     {
-        $source = [ 'key' => 'val'];
+        $source = $this->createMock(Source::class);
         MockAuthSource::getById($source, 'add');
-        $source['key'] = 'val1';
 
         $loadedSource = SimpleSAML\Auth\Source::getById('add');
-        $this->assertEquals('val1', $loadedSource['key']);
-
-        $loadedSource['key'] = 'val2';
-        $this->assertEquals('val1', $source['key']);
+        $this->assertEquals($source, $loadedSource);
     }
 
     public function testMockCompleteAuth()
