@@ -15,19 +15,24 @@ Update the dependency
     
 # Usage
 
-This project makes heavy use of `AspectMock` to make SSP's internal easier to test.
-Adjust your phpunit bootstrap.php per https://github.com/Codeception/AspectMock to setup AspectMock
-and also ensure you set `backupGlobals="false"` in phpunit.xml. See this projects `boostrap.php` on
-some workarounds for getting AspectMock to play nicely with SSP's custom class loader
+## Migration to version 2
+
+Version 1 of this project makes heavy use of `AspectMock` to make SSP's internal easier to test. However
+AspectMock's support for php8 has been slow to materialize so we are looking alternate ways to provide
+that functionality. In SSP 2 more classes were moved from static methods to instance methods which makes
+it easier to mock them using phpunit.
+
+### Cleanup your `bootstrap.php`
+
+If you used version 1 then you likely have AspectMock code in your `bootstrap.php`. Remove the code.
+
 
 You can sanity check your project by calling `SanityChecker::confirmAspectMockConfigured()`
 in a test. See `AspectMockConfiguredTest` for an example.
 
+### Clean up tests
 
-## Clearing Static State
-
-
-You *should* reset `AspectMock` after each test.
+Your tests likely have`AspectMock` code running in `tearDown`. Remove it, and the `use` statement.
 
 ```php
 use AspectMock\Test as test;
@@ -36,6 +41,8 @@ use AspectMock\Test as test;
         test::clean(); // remove all registered test doubles
     }
 ```
+
+## Clear SSP global state
 
 Several SSP components also cache things across all tests. Some of these classes are
 marked with the `\SimpleSAML\Utils\ClearableState` interface and you can clear this state

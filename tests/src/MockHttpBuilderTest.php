@@ -3,54 +3,64 @@
 namespace CirrusIdentity\SSP\Test;
 
 use CirrusIdentity\SSP\Test\Capture\RedirectException;
+use CirrusIdentity\SSP\Test\Capture\TrustedRedirectException;
+use CirrusIdentity\SSP\Test\Capture\UntrustedRedirectException;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use SimpleSAML\Utils\HTTP;
 
-use AspectMock\Test as test;
 
 /**
  *
  * Tests mock of various SSP HTTP util static calls
  */
-class MockHttpTest extends TestCase
+class MockHttpBuilderTest extends TestCase
 {
-
-    protected function tearDown(): void
+    protected function setUp(): void
     {
-        test::clean(); // remove all registered test doubles
+        $this->mockHttp = MockHttpBuilder::createHttpMockFromTestCase($this);
     }
+
 
     public function testTrustedRedirect()
     {
 
+
         // Enable throwing an exception when redirects would normally be called.
-        MockHttp::throwOnRedirectTrustedURL();
         $params = [
             'state' => '1234'
         ];
         try {
-            (new HTTP())->redirectTrustedURL('http://my.url.com', $params);
+            $this->mockHttp->redirectTrustedURL('http://my.url.com', $params);
             $this->fail('Exception expected');
-        } catch (RedirectException $e) {
+        } catch (TrustedRedirectException $e) {
             $this->assertEquals('redirectTrustedURL', $e->getMessage());
             $this->assertEquals('http://my.url.com', $e->getUrl());
             $this->assertEquals($params, $e->getParams());
+        }
+
+        // Confirm it can be called multiple times
+        try {
+            $this->mockHttp->redirectTrustedURL('http://other.url.com');
+            $this->fail('Exception expected');
+        } catch (TrustedRedirectException $e) {
+            $this->assertEquals('redirectTrustedURL', $e->getMessage());
+            $this->assertEquals('http://other.url.com', $e->getUrl());
+            $this->assertEquals([], $e->getParams());
         }
     }
 
     public function testUntrustedRedirect()
     {
 
-        // Enable throwing an exception when redirects would normally be called.
-        MockHttp::throwOnRedirectUntrustedURL();
 
         $params = [
             'state' => '1234'
         ];
         try {
-            (new HTTP())->redirectUntrustedURL('http://my.url.com', $params);
+            $this->mockHttp->redirectUntrustedURL('http://my.url.com', $params);
             $this->fail('Exception expected');
-        } catch (RedirectException $e) {
+        } catch (UntrustedRedirectException $e) {
             $this->assertEquals('redirectUntrustedURL', $e->getMessage());
             $this->assertEquals('http://my.url.com', $e->getUrl());
             $this->assertEquals($params, $e->getParams());

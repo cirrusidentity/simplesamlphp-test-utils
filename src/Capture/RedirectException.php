@@ -9,7 +9,7 @@ class RedirectException extends ArgumentCaptureException
      * Get the URL to redirect to
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->getArguments()[0];
     }
@@ -18,7 +18,7 @@ class RedirectException extends ArgumentCaptureException
      * Get the paramaters used with the redirect.
      * @return array
      */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->getArguments()[1];
     }
