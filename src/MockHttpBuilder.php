@@ -26,7 +26,7 @@ class MockHttpBuilder
 
     /**
      * @param TestCase $testCase
-     * @return MockObject|HTTP
+     * @return MockObject&HTTP
      */
     public static function createHttpMockFromTestCase(TestCase $testCase): MockObject
     {
@@ -40,7 +40,7 @@ class MockHttpBuilder
     }
 
     /**
-     * @return MockObject
+     * @return MockObject&HTTP
      */
     public function getHttp(): MockObject
     {
