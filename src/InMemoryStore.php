@@ -23,7 +23,7 @@ class InMemoryStore implements StoreInterface, ClearableState
      *
      * @return mixed|null The value.
      */
-    public function get(string $type, string $key)
+    public function get(string $type, string $key): mixed
     {
         if (array_key_exists($key, self::$store)) {
             $item = self::$store[$key];
@@ -40,11 +40,11 @@ class InMemoryStore implements StoreInterface, ClearableState
      * Save a value to the data store.
      *
      * @param string $type The data type.
-     * @param string $key The key.
+     * @param string|null $key The key.
      * @param mixed $value The value.
      * @param int|null $expire The expiration time (unix timestamp), or null if it never expires.
      */
-    public function set(string $type, string $key, $value, ?int $expire = null): void
+    public function set(string $type, ?string $key, $value, ?int $expire = null): void
     {
         self::$store[$key] = [
             'type' => $type,

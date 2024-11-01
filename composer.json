@@ -5,7 +5,7 @@
     "license" : "LGPL-2.1-only",
     "_notes": ["Aspect mock issue https://github.com/Codeception/AspectMock/issues/146 causes us to downgrade goaop/framework"],
     "require": {
-        "php": ">=7.4 || ^8.0",
+        "php": ">=^8.0",
         "simplesamlphp/simplesamlphp": "^v2.0.0-rc2"
     },
     "require-dev": {
